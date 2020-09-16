@@ -22,23 +22,23 @@ public class LoginController {
 
 
     @RequestMapping(value = "index.html")
-    public String loginPage(){
+    public String loginPage() {
         return "login";
     }
 
 
     @RequestMapping(value = "loginCheck.html")
-    public ModelAndView loginCheck(HttpServletRequest request,LoginCommand loginCommand){
+    public ModelAndView loginCheck(HttpServletRequest request, LoginCommand loginCommand) {
         boolean isV = userService.hasMatchUser(loginCommand.getUserName(), loginCommand.getPassword());
 
-        if(!isV){
-            return new ModelAndView("login","error","用户名或密码错误！");
-        }else{
+        if (!isV) {
+            return new ModelAndView("login", "error", "用户名或密码错误！");
+        } else {
             User user = userService.findUserByuserName(loginCommand.getUserName());
             user.setLastIp(request.getLocalAddr());
             user.setLastVisit(new Date());
             userService.loginSuccess(user);
-            request.getSession().setAttribute("user",user);
+            request.getSession().setAttribute("user", user);
             return new ModelAndView("main");
         }
 

@@ -13,10 +13,11 @@ public class LoginLogDao {
     private final static String insert_sql = "INSERT INTO t_login_log(user_id,ip,login_datetime) VALUES (?,?,?)";
 
 
-    public void insertLoginLog(LoginLog loginLog){
-        Object[] args = {loginLog.getUserId(),loginLog.getIp(),loginLog.getLoginDate()};
-        jdbcTemplate.update(insert_sql,args);
+    public void insertLoginLog(LoginLog loginLog) {
+        Object[] args = {loginLog.getUserId(), loginLog.getIp(), loginLog.getLoginDate()};
+        jdbcTemplate.update(insert_sql, args);
     }
+
     @Autowired
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;

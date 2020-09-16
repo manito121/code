@@ -10,6 +10,7 @@ import static org.testng.Assert.assertTrue;
 @ContextConfiguration("classpath:smart-context.xml")
 public class UserServiceTest extends AbstractTransactionalTestNGSpringContextTests {
     private UserService userService;
+
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -17,7 +18,7 @@ public class UserServiceTest extends AbstractTransactionalTestNGSpringContextTes
 
 
     @Test
-    public void hasMatchUser(){
+    public void hasMatchUser() {
 
         boolean b1 = userService.hasMatchUser("admin", "123456");
         boolean b2 = userService.hasMatchUser("admin", "1111");

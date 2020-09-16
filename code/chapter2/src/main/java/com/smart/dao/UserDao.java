@@ -18,16 +18,16 @@ public class UserDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    private final static String sql_MatchCount ="SELECT COUNT(*) FROM t_user WHERE user_name=? and `password`=?";
+    private final static String sql_MatchCount = "SELECT COUNT(*) FROM t_user WHERE user_name=? and `password`=?";
 
-    private final static String update_Sql="UPDATE t_user SET last_visit=?,last_ip=?,credits=? WHERE user_id=?";
+    private final static String update_Sql = "UPDATE t_user SET last_visit=?,last_ip=?,credits=? WHERE user_id=?";
 
-    public int getMatchCount(String userName,String password){
+    public int getMatchCount(String userName, String password) {
 
-        return jdbcTemplate.queryForObject(sql_MatchCount,new Object[]{userName,password},Integer.class);
+        return jdbcTemplate.queryForObject(sql_MatchCount, new Object[]{userName, password}, Integer.class);
     }
 
-    public User findUserByUserName(final String userName){
+    public User findUserByUserName(final String userName) {
         String sqlStr = " SELECT user_id,user_name,credits "
                 + " FROM t_user WHERE user_name =? ";
         final User user = new User();
@@ -43,13 +43,11 @@ public class UserDao {
     }
 
 
-    public void updateLoginInfo(User user)
-    {
-        jdbcTemplate.update(update_Sql,new Object[]{user.getLastVisit(),
-                user.getLastIp(),user.getCredits(),user.getUserId()});
+    public void updateLoginInfo(User user) {
+        jdbcTemplate.update(update_Sql, new Object[]{user.getLastVisit(),
+                user.getLastIp(), user.getCredits(), user.getUserId()});
 
     }
-
 
 
 }

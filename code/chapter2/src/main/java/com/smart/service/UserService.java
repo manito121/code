@@ -18,6 +18,7 @@ public class UserService {
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }
+
     @Autowired
     public void setLoginLogDao(LoginLogDao loginLogDao) {
         this.loginLogDao = loginLogDao;
@@ -25,21 +26,21 @@ public class UserService {
 
 
     //验证用户是否存在
-    public boolean hasMatchUser(String userName,String password){
+    public boolean hasMatchUser(String userName, String password) {
         int matchCount = userDao.getMatchCount(userName, password);
-        return matchCount>0;
+        return matchCount > 0;
     }
 
     //通过名称查询用户信息
-    public User findUserByuserName(String userName){
+    public User findUserByuserName(String userName) {
         User userByUserName = userDao.findUserByUserName(userName);
         return userByUserName;
     }
 
     //修改登录成功后的信息
     @Transactional
-    public void loginSuccess(User user){
-        user.setCredits(5+user.getCredits());
+    public void loginSuccess(User user) {
+        user.setCredits(5 + user.getCredits());
         LoginLog loginLog = new LoginLog();
         loginLog.setUserId(user.getUserId());
         loginLog.setIp(user.getLastIp());
